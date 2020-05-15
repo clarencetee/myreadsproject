@@ -98,20 +98,37 @@ class Searchpage extends Component {
                         <alert>Please try another search term!</alert>
                       )}
 
-                      {this.state.query !== "" &&
+                      {!this.state.showErrorMessage &&
+                        this.state.query !== "" &&
                         this.state.books.map((book) => (
                           <li key={book.id}>
                             <div className="book">
                               <div className="book-top">
-                                <div
-                                  className="book-cover"
-                                  style={{
-                                    width: 128,
-                                    height: 193,
-                                    backgroundImage:
-                                      "url(" + book.imageLinks.thumbnail + ")",
-                                  }}
-                                ></div>
+                                {!book.imageLinks && (
+                                  <div
+                                    className="book-cover"
+                                    style={{
+                                      width: 128,
+                                      height: 193,
+                                      backgroundImage:
+                                        "url(https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-no-image-available-icon-flat-vector-illustration.jpg)",
+                                    }}
+                                  />
+                                )}
+
+                                {book.imageLinks && (
+                                  <div
+                                    className="book-cover"
+                                    style={{
+                                      width: 128,
+                                      height: 193,
+                                      backgroundImage:
+                                        "url(" +
+                                        book.imageLinks.thumbnail +
+                                        ")",
+                                    }}
+                                  />
+                                )}
                                 <div className="book-shelf-changer">
                                   <select
                                     key={book.id}
@@ -144,3 +161,12 @@ class Searchpage extends Component {
 }
 
 export default Searchpage;
+
+/* 
+getImage = (book) => {
+    BooksAPI.get(book.id).then((result) => {
+      if (result.imageLinks) return result.imageLinks.thumbnail;
+      return "../icons/noimg.jpg";
+    });
+  };
+  */

@@ -31,6 +31,7 @@ class BooksApp extends React.Component {
     });
     this.setState({ books: books });
     BooksAPI.update(book, newOption);
+    console.log(this.state.books);
   };
 
   /* enumerating ids in the home state's books so we can check if 
